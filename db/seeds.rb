@@ -1,11 +1,3 @@
-tag_name = 
-[
-  "Spicy","Sweet","Vegetarian",
-  "Vegan","Mexican","Itallian",
-  "American","Indian","Chinese",
-  "Fast-Food"
-]
-tag_name.each{|tag|Tag.create(name: tag)}
 
 dish_names = 
 [
@@ -29,3 +21,23 @@ while(i<20)
   i += 1
 end
 
+tag_name = 
+[
+  "Spicy","Sweet","Vegetarian",
+  "Vegan","Mexican","Itallian",
+  "American","Indian","Chinese",
+  "Fast-Food"
+]
+tag_name.each{|tag|Tag.create(name: tag)}
+
+Dish.all.each do |dish|
+  shuffle_tags = Tag.all.shuffle 
+  i = 0 
+  while (i < 3)
+    dish_tag = DishTag.create 
+    dish_tag.dish = dish
+    dish_tag.tag = shuffle_tags[i]
+    dish_tag.save 
+    i += 1 
+  end 
+end 
